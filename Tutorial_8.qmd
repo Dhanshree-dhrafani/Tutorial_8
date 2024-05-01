@@ -1,15 +1,43 @@
 ---
 title: "Tutorial_8"
-format: html
-editor: visual
+author: Morrison Wang
+format: 
+  pdf:
+    toc: true
+    toc-depth: 1
 ---
-```{r}
-library(readr)
-```
 
+```{r}
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(readr)
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+```
 
 ```{r}
 data_tutorail <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
 ```
 
 
+
+# 2. Offence - Subgroup
+
+```{r}
+data_tutorail <- data_tutorail |>
+  select("Offence.Subgroup", "Incidents.Recorded")
+```
+
+```{r}
+data_tutorail$Incidents.Recorded <- as.numeric(data_tutorail$Incidents.Recorded)
+```
+
+```{r}
+data_tutorail <- data_tutorail |>
+  group_by(`Offence.Subgroup`) |>
+  summarise(Total_Incidents.Recorded = sum(Incidents.Recorded))
+
+data_tutorail$Total_Incidents.Recorded[is.na(data_tutorail$Total_Incidents.Recorded)] <- 0
+```
