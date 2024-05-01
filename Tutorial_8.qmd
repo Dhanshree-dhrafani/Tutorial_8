@@ -13,6 +13,8 @@ library(tidyverse)
 data_tutorail <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
 ```
 
+# Section 2
+
 ```{r}
 plot_dataframe <- data_tutorail %>% 
   filter(Offence.Division == "A Crimes against the person")
@@ -27,7 +29,7 @@ ggplot(data = plot_dataframe, aes(x = Offence.Subdivision, y = Incidents.Recorde
 ```
 The graph shows nothing. 
 
-# section 3
+# Section 3
 
 ```{r}
 
