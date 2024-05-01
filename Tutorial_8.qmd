@@ -3,4 +3,13 @@ title: "Tutorial_8"
 format: html
 editor: visual
 ---
+```{r}
+library(readr)
+```
+
+
+```{r}
+data_tutorail <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
+```
+
 
