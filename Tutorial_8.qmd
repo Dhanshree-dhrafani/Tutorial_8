@@ -21,23 +21,51 @@ library(dplyr)
 data_tutorail <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
 ```
 
-
-
-# 2. Offence - Subgroup
+# Section 1
 
 ```{r}
-data_tutorail <- data_tutorail |>
+data_tutorail_1 <- data_tutorail |>
   select("Offence.Subgroup", "Incidents.Recorded")
 ```
 
 ```{r}
-data_tutorail$Incidents.Recorded <- as.numeric(data_tutorail$Incidents.Recorded)
+data_tutorail_1$Incidents.Recorded <- as.numeric(data_tutorail_1$Incidents.Recorded)
 ```
 
 ```{r}
-data_tutorail <- data_tutorail |>
+data_tutorail_2 <- data_tutorail_1 |>
   group_by(`Offence.Subgroup`) |>
   summarise(Total_Incidents.Recorded = sum(Incidents.Recorded))
 
-data_tutorail$Total_Incidents.Recorded[is.na(data_tutorail$Total_Incidents.Recorded)] <- 0
+data_tutorail_2$Total_Incidents.Recorded[is.na(data_tutorail_2$Total_Incidents.Recorded)] <- 0
+```
+
+
+
+# Section 2
+```{r}
+plot_dataframe <- data_tutorail %>% 
+  filter(Offence.Division == "A Crimes against the person")
+```
+
+
+```{r}
+ggplot(data = plot_dataframe, aes(x = Offence.Subdivision, y = Incidents.Recorded)) +
+  geom_col(color = "blue") +
+  labs(title = "Offence Division Graph",
+       x = "Crimes against the person",
+       y = "Incidents Recorded")
+```
+The graph shows nothing. 
+
+# Section 3
+
+```{r}
+
+data_tutorail %>%
+  filter(Offence.Division == "C Drug offences") %>%
+  ggplot(aes(x = Offence.Subdivision,
+             y = Incidents.Recorded)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_col()
 ```
