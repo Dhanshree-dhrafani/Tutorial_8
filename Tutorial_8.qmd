@@ -3,13 +3,29 @@ title: "Tutorial_8"
 format: html
 editor: visual
 ---
+
 ```{r}
 library(readr)
+library(tidyverse)
 ```
-
 
 ```{r}
 data_tutorail <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
 ```
 
+# 2
 
+```{r}
+library(ggplot2)
+plot_dataframe <- data_tutorail %>% 
+  filter(Offence.Division == "A Crimes against the person")
+```
+
+```{r}
+ggplot(data = plot_dataframe, aes(x = Offence.Subdivision, y = Incidents.Recorded)) +
+  geom_col(color = "blue") +
+  labs(title = "Offence Division Graph",
+       x = "Crimes against the person",
+       y = "Incidents Recorded")
+```
+The graph shows nothing. 
